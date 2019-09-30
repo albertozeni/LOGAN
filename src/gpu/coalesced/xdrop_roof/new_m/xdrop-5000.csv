@@ -1,0 +1,50 @@
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed",527296884696,528691117990,527994001343,1055988002686
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"thread_inst_executed",16843322336696,16887852509422,16865587423059,33731174846118
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_global_reductions","Warp level instructions for global reductions",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_global_stores","Warp level instructions for global stores",800000,800000,800000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_global_loads","Warp level instructions for global loads",7596932124,7621148000,7609040062
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_local_loads","Warp level instructions for local loads",960000,960000,960000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_local_stores","Warp level instructions for local stores",1596887520,1599272480,1598080000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_shared_loads","Warp level instructions for shared loads",36649023218,36761662181,36705342699
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed_shared_stores","Warp level instructions for shared stores",15435285200,15479179408,15457232304
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_executed","Instructions Executed",527296884696,528691117990,527994001343
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_integer","Integer Instructions",7693935994140,7713791220436,7703863607288
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_compute_ld_st","Load/Store Instructions",1955540661585,1961384809063,1958462735324
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_bit_convert","Bit-Convert Instructions",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_control","Control-Flow Instructions",2737240473768,2743553216042,2740396844905
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_fp_64","FP Instructions(Double)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_fp_32","FP Instructions(Single)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"inst_fp_16","HP Instructions(Half)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"flop_count_dp_fma","Floating Point Operations(Double Precision FMA)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"flop_count_dp","Floating Point Operations(Double Precision)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"flop_count_sp","Floating Point Operations(Single Precision)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"flop_count_hp","Floating Point Operations(Half Precision)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"flop_count_dp_fma","Floating Point Operations(Double Precision FMA)",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"local_load_transactions","Local Load Transactions",3840000,3840000,3840000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"local_load_transactions_per_request","Local Memory Load Transactions Per Request",4.000000,4.000000,4.000000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"local_store_transactions","Local Store Transactions",6387550080,6397089920,6392320000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"local_store_transactions_per_request","Local Memory Store Transactions Per Request",4.000000,4.000000,4.000000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"shared_load_transactions","Shared Load Transactions",36970105244,37083348770,37026727007
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"shared_load_transactions_per_request","Shared Memory Load Transactions Per Request",1.008747,1.008767,1.008757
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"shared_store_transactions","Shared Store Transactions",15626522472,15670602262,15648562367
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"shared_store_transactions_per_request","Shared Memory Store Transactions Per Request",1.012373,1.012386,1.012379
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"gst_transactions_per_request","Global Store Transactions Per Request",1.000000,1.000000,1.000000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"gst_transactions","Global Store Transactions",800000,800000,800000
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"gld_transactions_per_request","Global Load Transactions Per Request",1.961947,1.962432,1.962189
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"gld_transactions","Global Load Transactions",14908482499,14952357497,14930419998
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"l2_read_transactions","L2 Read Transactions",288207387,299947352,294077369
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"l2_write_transactions","L2 Write Transactions",6388350610,6397890350,6393120480
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"dram_read_transactions","Device Memory Read Transactions",2173659,2199665,2186662
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"dram_write_transactions","Device Memory Write Transactions",1376621,1512378,1444499
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"sysmem_read_transactions","System Memory Read Transactions",0,0,0
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"sysmem_write_transactions","System Memory Write Transactions",5,5,5
+
+
+
+
+
+
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"branch_efficiency","Branch Efficiency",99.908223%,99.908300%,99.908261%
+
+
+"Tesla V100-SXM2-16GB (0)","extendSeedLGappedXDropOneDirectionShared(SeedL*, char*, char*, ExtensionDirectionL, int, int*, int*, int*, int)",2,"ipc","Executed IPC",2.116580,2.118024,2.117302

@@ -1,3 +1,3 @@
-# Logan
+# LOGAN
 
-Logan: High-Performance X-Drop Pairwise Alignment on GPU
+LOGAN: High-Performance X-Drop Pairwise Alignment on GPU

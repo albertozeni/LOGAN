@@ -154,8 +154,12 @@ int main(int argc, char **argv)
         local[tid].push_back(tmp);
     }
 
+	unsigned int alignmentssofar = 0;
 	for(int tid = 0; tid < maxt; ++tid)
-		alignments.insert(local[tid].begin(), local[tid].end());
+	{
+		copy(local[tid].begin(), local[tid].end(), alignments.begin() + alignmentssofar);
+		alignmentssofar += local[tid].size();
+	}
 
 	/* Compute pairwise alignments */
    	LOGAN(alignments, ksize, xdrop, num, ngpus, maxt);	

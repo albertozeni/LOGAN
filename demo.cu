@@ -103,6 +103,7 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 		/* match, mismatch, gap opening, gap extension */ 
 		ScoringSchemeL sscheme(1, -1, -1, -1);
 		penalties[i] = sscheme;
+		/* starting position on target, starting position on query, k-mer/seed size */
 		SeedL sseed(posH[i], posV[i], ksize);
 		seeds[i] = sseed;
     }

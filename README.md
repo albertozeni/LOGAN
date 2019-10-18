@@ -9,6 +9,20 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 ## Usage
 
+### Compilation
+
+TBD
+
+### Demo
+
+TBD
+
+Demo's input format:
+```
+[seqV] [posV] [seqH] [posH] [strand]
+```
+**Each line of the input contains a pair of sequences to align**: the query sequence (seqV), the starting position of the seed on the query sequence (posV), the target sequence (seqH), the starting position of the seed on the target sequence (posH), and the relative strand ("c" if on opposite strands, "n" otherwise). Tab separated.
+
 ## Performance Analysis
 
 ## Copyright Notice

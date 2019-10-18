@@ -11,4 +11,6 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 ## Performance Analysis
 
-## License
+## Copyright Notice
+
+## Acknowledgments

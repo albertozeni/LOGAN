@@ -101,8 +101,10 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
         }
 
 		/* match, mismatch, gap opening, gap extension */ 
-        penalties[i](1, -1, -1, -1);
-		seeds[i](posH[i], posV[i], ksize);
+		ScoringSchemeL sscheme(1, -1, -1, -1);
+		penalties[i] = sscheme;
+		SeedL sseed(posH[i], posV[i], ksize);
+		seeds[i] = sseed;
     }
 
     int* results = (int*)malloc(sizeof(int)*num);

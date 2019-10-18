@@ -15,5 +15,5 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 ## Acknowledgments
 <p align="justify">
-Funding provided in part by DOE ASCR through the Exascale Computing Project, and computing provided by NERSC and the Oak Ridge Leadership Computing Facility. Thanks to Francesco Peverelli and Muaaz Awan for useful suggestions and valuable discussions.
+Funding provided in part by DOE ASCR through the [Exascale Computing Project](https://www.exascaleproject.org/), and computing provided by [NERSC](https://www.nersc.gov/) and the Oak Ridge Leadership Computing Facility. Thanks to Francesco Peverelli and Muaaz Awan for useful suggestions and valuable discussions.
 </p>

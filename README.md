@@ -22,7 +22,7 @@ To compile LOGAN simply type:
 make demo_v100
 ```
 LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but can run on any NVIDA GPU.
-To compile using no GPU optmimization flags in order to use other GPUs simply type:
+To compile using no GPU optmimization flags to use other GPUs simply type:
 ```
 make demo
 ```

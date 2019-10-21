@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="800" height="522" src="https://github.com/albertozeni/logan/blob/master/media/logan.jpeg">
+</p>
+
 # LOGAN
 
 LOGAN: High-Performance X-Drop Pairwise Alignment on GPU
@@ -11,13 +15,31 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 ### Compilation
 
-TBD
+LOGAN requires CUDA 10 and C++14
 
+To compile LOGAN simply type:
+```
+make demo_v100
+```
+LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but can run on any NVIDA GPU.
+To compile using no GPU optmimization flags in order to use other GPUs simply type:
+```
+make demo
+```
 ### Demo
 
-TBD
-
-Demo's input format:
+When LOGAN has been compiled an executable called "demo" will be generated.
+To check everything has been compiled properly type
+```
+./demo inputs_demo/example.txt 17 21 1
+```
+This command will execute LOGAN on our example dataset with a kmer length of 17, an X-Drop value of 21 and a single GPU.
+If everything executes correctly you can start using LOGAN with any input and any number of GPUs.
+The command line inputs are:
+```
+./demo [sequence_file] [kmerLength] [X-Drop] [#GPUS]
+```
+The format the input files for this demo is:
 ```
 [seqV] [posV] [seqH] [posH] [strand]
 ```

@@ -1,9 +1,7 @@
 
 //=========================================================
 // Title:	LOGAN's Demo
-// Author:	G. Guidi
-// Created:	12 March 2019
-// Last modified: 18 October 2019
+// Authors:	A.Zeni, G. Guidi
 //=========================================================
 
 #include <omp.h>

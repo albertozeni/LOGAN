@@ -46,18 +46,18 @@ The input format for this demo is:
 LOGAN and [SeqAn](https://github.com/seqan/seqan) execution times in seconds for 100K alignments (Power9 platform with 6 NVIDIA Tesla V100S).
 
 | X-Drop 	| SeqAn 	| LOGAN (1 GPU) 	| LOGAN (6 GPUs) 	|
-|--------	|-------	|---------------	|----------------	|
+|--------:	|-------:	|---------------:	|----------------:	|
 | 20     	|  12.7 	|           3.1 	|            2.1 	|
 | 50     	|  29.6 	|           5.0 	|            2.2 	|
 | 100    	|  45.7 	|           7.2 	|            2.7 	|
 
 LOGAN and [ksw2](https://github.com/lh3/ksw2) execution times in seconds for 100K alignments ("Skylake" platform with 8 NVIDIA Tesla V100S).
 
-| X-Drop 	| ksw2  	| LOGAN (1 GPU) 	| LOGAN (8 GPUs) 	|
-|--------	|-------	|---------------	|----------------	|
-| 20     	|  7.0  	|           3.8 	|            1.8 	|
-| 50     	|  7.7  	|           5.8 	|            2.1 	|
-| 100    	| 10.4  	|           7.3 	|            2.4 	|
+| X-Drop 	| ksw2 	| LOGAN (1 GPU) 	| LOGAN (8 GPUs) 	|
+|-------:	|-------:	|--------------:	|---------------:	|
+|     20 	|  7.0 	|           3.8 	|            1.8 	|
+|     50 	|  7.7 	|           5.8 	|            2.1 	|
+|    100 	| 10.4 	|           7.3 	|            2.4 	|
 
 ## Copyright Notice
 

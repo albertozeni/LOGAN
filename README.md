@@ -45,6 +45,14 @@ The input format for this demo is:
 
 Table summarizing our performance. TBD.
 
+LOGAN and SeqAn execution times in seconds for 100K alignments (Power9 platform with 6 NVIDIA Tesla V100S).
+
+| X-Drop |      SeqAn | LOGAN (1 GPU) | LOGAN (6 GPUs) |
+|--------|------------|---------------|----------------|
+| 20     |       12.7 |           3.1 |            2.1 |
+| 50     |       29.6 |           5.0 |            2.2 |
+| 100    |       45.7 |           7.2 |            2.7 |
+
 ## Copyright Notice
 
 TBD

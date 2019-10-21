@@ -22,24 +22,26 @@ To compile LOGAN simply type:
 make demo_v100
 ```
 LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but can run on any NVIDA GPU.
-To compile using no GPU optmimization flags to use other GPUs simply type:
+To compile to use other GPUs simply type:
 ```
 make demo
 ```
-### Demo
+This command disables Tesla V100 GPU optmimization flags. 
 
-When LOGAN has been compiled an executable called "demo" will be generated.
-To check everything has been compiled properly type
+### Demo
+LOGAN generates an executable called **demo**.
+To check everything has been compiled properly type:
 ```
 ./demo inputs_demo/example.txt 17 21 1
 ```
-This command will execute LOGAN on our example dataset with a kmer length of 17, an X-Drop value of 21 and a single GPU.
-If everything executes correctly you can start using LOGAN with any input and any number of GPUs.
+This command executes LOGAN on our example dataset with a k-mer length of 17, an X-drop value of 21 using a single GPU.
+If everything executes correctly you can start using LOGAN with any input, any X-drop, and any number of GPUs.
+
 The command line inputs are:
 ```
-./demo [sequence_file] [kmerLength] [X-Drop] [#GPUS]
+./demo [input] [k-mer-length] [X-drop] [#GPUS]
 ```
-The format the input files for this demo is:
+The input format for this demo is:
 ```
 [seqV] [posV] [seqH] [posH] [strand]
 ```
@@ -53,4 +55,4 @@ TBD
 
 ## Acknowledgments
 
-Funding provided in part by DOE ASCR through the [Exascale Computing Project](https://www.exascaleproject.org/), and computing provided by [NERSC](https://www.nersc.gov/) and the Oak Ridge Leadership Computing Facility. Thanks to Francesco Peverelli and Muaaz Awan for useful suggestions and valuable discussions.
+Funding provided in part by DOE ASCR through the [Exascale Computing Project](https://www.exascaleproject.org/), and computing provided by [NERSC](https://www.nersc.gov/) and the [Oak Ridge Leadership Computing Facility](https://www.olcf.ornl.gov/). Thanks to Francesco Peverelli and Muaaz Awan for useful suggestions and valuable discussions.

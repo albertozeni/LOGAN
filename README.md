@@ -49,6 +49,8 @@ The input format for this demo is:
 
 ## Performance Analysis
 
+Table summarizing our performance. TBD.
+
 ## Copyright Notice
 
 TBD

@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 
 	int ksize = atoi(argv[2]);	
 	int xdrop = atoi(argv[3]);	
-	int ngpus = atoi(argv[5]);
+	int ngpus = atoi(argv[4]);
 
 	int maxt = 1;
 	#pragma omp parallel

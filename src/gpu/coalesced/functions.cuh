@@ -440,13 +440,13 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	auto start_t1 = NOW;
 
 	//set num of threads
-	if(n_threads == 1){
-                std::cout<< "AUTOMATIC DETECTION OF THREADS" << std::endl;
+	//if(n_threads == 1){
+    //            std::cout<< "AUTOMATIC DETECTION OF THREADS" << std::endl;
                 n_threads = (XDrop/WARP_DIM + 1)* WARP_DIM;
                 if(n_threads>1024)
                         n_threads=1024;
-        }
-        std::cout<< "RUNNING WITH "<<n_threads<< " THREADS"<<std::endl;
+    //    }
+    //    std::cout<< "RUNNING WITH "<<n_threads<< " THREADS"<<std::endl;
 
 	//declare streams
 	cudaStream_t stream_r[MAX_GPUS], stream_l[MAX_GPUS];

@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="800" height="522" src="https://github.com/albertozeni/logan/blob/master/media/logan.jpeg">
+  <img width="800" height="522" src="https://github.com/albertozeni/logan/blob/master/media/logan.png">
 </p>
 
 ## Introduction

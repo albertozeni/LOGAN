@@ -572,6 +572,8 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	// GG: measuring load balance/imbalance
 	std::vector<double> pergputtime(ngpus);
 	std::vector<double> pergpuctime(ngpus);
+	std::vector<int> pergpuseqs(ngpus);
+
 	auto start_transfer = NOW;
 
 	#pragma omp parallel for
@@ -580,6 +582,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		int MYTHREAD = omp_get_thread_num();
 		auto start_transfer_ithread = NOW;
 		int dim = nSequences;
+		pergpuseqs[MYTHREAD].push_back(dim);
 		if(i==ngpus-1)
 			dim = nSequencesLast;
 		//set gpu device
@@ -588,8 +591,8 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaStreamCreateWithFlags(&stream_r[i],cudaStreamNonBlocking);
 		cudaStreamCreateWithFlags(&stream_l[i],cudaStreamNonBlocking);
 		//allocate antidiagonals on the GPU
-                cudaErrchk(cudaMalloc(&ant_l[i], sizeof(short)*ant_len_left[i]*3*dim));
-                cudaErrchk(cudaMalloc(&ant_r[i], sizeof(short)*ant_len_right[i]*3*dim));
+        cudaErrchk(cudaMalloc(&ant_l[i], sizeof(short)*ant_len_left[i]*3*dim));
+        cudaErrchk(cudaMalloc(&ant_r[i], sizeof(short)*ant_len_right[i]*3*dim));
 		//allocate offsets on the GPU
 		cudaErrchk(cudaMalloc(&offsetLeftQ_d[i], dim*sizeof(int)));
 		cudaErrchk(cudaMalloc(&offsetLeftT_d[i], dim*sizeof(int)));
@@ -691,7 +694,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 
 	for(int i = 0; i < ngpus; i++)
 	{
-		std::cout << "GPU" << i << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
+		std::cout << "GPU" << i << "	seqs	:" << pergpuseqs[i] << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
 	}
 
 	cudaErrchk(cudaPeekAtLastError());

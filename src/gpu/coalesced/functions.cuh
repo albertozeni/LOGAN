@@ -623,7 +623,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 
 		auto end_transfer_ithread = NOW;
 		duration<double> transfer_ithread = end_transfer_ithread - start_transfer_ithread;
-		pergputtime[MYTHREAD].push_back(transfer_ithread.count());
+		pergputtime[MYTHREAD] = transfer_ithread.count();
 	}
 	
 	
@@ -651,7 +651,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		extendSeedLGappedXDropOneDirectionGlobal <<<dim, n_threads, n_threads*sizeof(short), stream_r[i]>>> (seed_d_r[i], suffQ_d[i], suffT_d[i], EXTEND_RIGHTL, XDrop, scoreRight_d[i], offsetRightQ_d[i], offsetRightT_d[i], ant_len_right[i], ant_r[i], n_threads);
 		auto end_c_ithread_1 = NOW;
 		duration<double> c_ithread_1 = end_c_ithread_1 - start_c_ithread_1;
-		pergpuctime[MYTHREAD].push_back(c_ithread_1.count());
+		pergpuctime[MYTHREAD] = c_ithread_1.count();
 		//cout<<"LAUNCHED"<<endl;
 	}
 

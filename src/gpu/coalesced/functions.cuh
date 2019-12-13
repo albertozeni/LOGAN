@@ -582,7 +582,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		int MYTHREAD = omp_get_thread_num();
 		auto start_transfer_ithread = NOW;
 		int dim = nSequences;
-		pergpuseqs[MYTHREAD].push_back(dim);
+		pergpuseqs[MYTHREAD] = dim;
 		if(i==ngpus-1)
 			dim = nSequencesLast;
 		//set gpu device

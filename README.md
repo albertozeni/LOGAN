@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="700" height="457" src="https://github.com/albertozeni/logan/blob/master/media/logan.png">
+  <img width="585" height="460" src="https://github.com/albertozeni/logan/blob/master/media/logan.png">
 </p>
 
 ## Introduction
@@ -41,6 +41,8 @@ The input format for this demo is:
 ```
 **Each line of the input contains a pair of sequences to align**: the query sequence (seqV), the starting position of the seed on the query sequence (posV), the target sequence (seqH), the starting position of the seed on the target sequence (posH), and the relative strand ("c" if on opposite strands, "n" otherwise). Tab separated.
 
+LOGAN has been incorporated as part of the [**BELLA**](https://github.com/giuliaguidi/bella) genomic pipeline. BELLA is a computationally efficient and highly accurate long-read to long-read aligner and overlapper. Users can optionally use LOGAN as pairwise alignment kernel.
+
 ## Performance Analysis
 
 LOGAN and [SeqAn](https://github.com/seqan/seqan) execution times in seconds for 100K alignments (Power9 platform with 6 NVIDIA Tesla V100S).
@@ -69,9 +71,35 @@ LOGAN and [ksw2](https://github.com/lh3/ksw2) execution times in seconds for 100
 |   2500  	|   1235.8	|          25.9		|            5.2 	|
 |   5000  	|   3213.1	|          27.2		|            5.2 	|
 
-## Copyright Notice
+## Citation
 
-TBD
+To cite our work or to know more about our methods, please refer to:
+
+> TBD
+
+## Copyright Notice
+<p align="justify">
+LOGAN: High-Performance X-Drop Pairwise Alignment on GPU (LOGAN) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+</p>
+
+<p align="justify">
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab's Intellectual Property Office at
+IPO@lbl.gov.
+</p>
+
+<p align="justify">
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+</p>
 
 ## Acknowledgments
 

@@ -4,6 +4,8 @@
 // Date:   6 March 2019
 //==================================================================
 
+#include <omp.h>
+
 #define MIN -32768
 #define BYTES_INT 4
 //#define N_STREAMS 60

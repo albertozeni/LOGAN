@@ -577,7 +577,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++)
 	{
-		int MYTHREAD = omp_num_threads();
+		int MYTHREAD = omp_get_thread_num();
 		auto start_transfer_ithread = NOW;
 		int dim = nSequences;
 		if(i==ngpus-1)
@@ -639,7 +639,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	#pragma omp parallel for
 	for(int i = 0; i<ngpus;i++)
 	{
-		int MYTHREAD = omp_num_threads();
+		int MYTHREAD = omp_get_thread_num();
 		auto start_c_ithread_1 = NOW;
 		cudaSetDevice(i);
 		
@@ -658,7 +658,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++)
 	{
-		int MYTHREAD = omp_num_threads();
+		int MYTHREAD = omp_get_thread_num();
 		auto start_c_ithread_2 = NOW;
 		cudaSetDevice(i);
 		int dim = nSequences;
@@ -676,7 +676,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++)
 	{
-		int MYTHREAD = omp_num_threads();
+		int MYTHREAD = omp_get_thread_num();
 		auto start_c_ithread_3 = NOW;
 		cudaSetDevice(i);
 		cudaDeviceSynchronize();

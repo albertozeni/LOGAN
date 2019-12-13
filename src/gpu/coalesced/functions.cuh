@@ -566,10 +566,16 @@ inline void extendSeedL(vector<SeedL> &seeds,
 
 		}
 	}
+
+	// GG: measuring load balance/imbalance
+	std::vector<double> pergputtime(ngpus);
+	std::vector<double> pergpuctime(ngpus);
 	auto start_transfer = NOW;
 
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++){
+
+		auto start_transfer_ithread = NOW;
 		int dim = nSequences;
 		if(i==ngpus-1)
 			dim = nSequencesLast;
@@ -611,6 +617,10 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaMemcpyAsync(suffQ_d[i], suffQ[i], totalLengthQSuff[i]*sizeof(char), cudaMemcpyHostToDevice, stream_r[i]));
 		cudaErrchk(cudaMemcpyAsync(suffT_d[i], suffT[i], totalLengthTSuff[i]*sizeof(char), cudaMemcpyHostToDevice, stream_r[i]));
 		//OK
+
+		auto end_transfer_ithread = NOW;
+		duration<double> transfer_ithread = end_transfer_ithread - start_transfer_ithread;
+		pergputtime[MYTHREAD].push_back(transfer_ithread);
 	}
 	
 	
@@ -625,6 +635,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	//execute kernels
 	#pragma omp parallel for
 	for(int i = 0; i<ngpus;i++){
+		auto start_c_ithread_1 = NOW;
 		cudaSetDevice(i);
 		
 		int dim = nSequences;
@@ -633,11 +644,14 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		
 		extendSeedLGappedXDropOneDirectionGlobal <<<dim, n_threads, n_threads*sizeof(short), stream_l[i]>>> (seed_d_l[i], prefQ_d[i], prefT_d[i], EXTEND_LEFTL, XDrop, scoreLeft_d[i], offsetLeftQ_d[i], offsetLeftT_d[i], ant_len_left[i], ant_l[i], n_threads);
 		extendSeedLGappedXDropOneDirectionGlobal <<<dim, n_threads, n_threads*sizeof(short), stream_r[i]>>> (seed_d_r[i], suffQ_d[i], suffT_d[i], EXTEND_RIGHTL, XDrop, scoreRight_d[i], offsetRightQ_d[i], offsetRightT_d[i], ant_len_right[i], ant_r[i], n_threads);
-
+		auto end_c_ithread_1 = NOW;
+		duration<double> c_ithread_1 = end_c_ithread_1 - start_c_ithread_1;
+		pergpuctime[MYTHREAD].push_back(c_ithread_1);
 		//cout<<"LAUNCHED"<<endl;
 	}
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++){
+		auto start_c_ithread_2 = NOW;
 		cudaSetDevice(i);
 		int dim = nSequences;
 		if(i==ngpus-1)
@@ -646,16 +660,28 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaMemcpyAsync(&seeds[0]+i*nSequences, seed_d_l[i], dim*sizeof(SeedL), cudaMemcpyDeviceToHost,stream_l[i]));
 		cudaErrchk(cudaMemcpyAsync(scoreRight+i*nSequences, scoreRight_d[i], dim*sizeof(int), cudaMemcpyDeviceToHost, stream_r[i]));
 		cudaErrchk(cudaMemcpyAsync(&seeds_r[0]+i*nSequences, seed_d_r[i], dim*sizeof(SeedL), cudaMemcpyDeviceToHost,stream_r[i]));
+		auto end_c_ithread_2 = NOW;
+		duration<double> c_ithread_2 = end_c_ithread_2 - start_c_ithread_2;
+		pergpuctime[MYTHREAD] += c_ithread_2;
 	}
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++){
+		auto start_c_ithread_2 = NOW;
 		cudaSetDevice(i);
 		cudaDeviceSynchronize();
+		auto end_c_ithread_3 = NOW;
+		duration<double> c_ithread_3 = end_c_ithread_3 - start_c_ithread_3;
+		pergpuctime[MYTHREAD] += c_ithread_3;
 	}
 
 	auto end_c = NOW;
 	duration<double> compute = end_c-start_c;
-	std::cout << "Compute time: " << compute.count() << std::endl;
+	std::cout << "Compute time:	" << compute.count() << std::endl;
+
+	for(int i = 0; i < ngpus; i++)
+	{
+		std::cout << "GPU" << i << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
+	}
 
 	cudaErrchk(cudaPeekAtLastError());
 

@@ -132,7 +132,7 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 		std::vector<SeedL>::const_iterator last_s  = seeds.begin() + i + numAlignmentsLocal;
 		std::vector<SeedL> seeds_b(first_s, last_s);
 
-		extendSeedL(seeds_b, EXTEND_BOTHL, target_b, query_b, penalties, xdrop, ksize, res, numAlignmentsLocal, ngpus);
+		extendSeedL(seeds_b, EXTEND_BOTHL, target_b, query_b, penalties, xdrop, ksize, res, numAlignmentsLocal, ngpus, maxt);
 
 		// for(int j=0; j<numAlignmentsLocal; j++)
 		// {

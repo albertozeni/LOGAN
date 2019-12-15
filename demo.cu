@@ -103,41 +103,41 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 		/* match, mismatch, gap opening, gap extension */ 
 		ScoringSchemeL sscheme(1, -1, -1, -1);
 		penalties[i] = sscheme;
-		/* starting position on target, starting position on query, k-mer/seed size */
+		/* starting position on seqsH, starting position on seqsV, k-mer/seed size */
 		SeedL sseed(posH[i], posV[i], ksize);
 		seeds[i] = sseed;
     }
 
-	// int numAlignmentsLocal = BATCH_SIZE * b_pars.numGPU; 
-	cout <<"///////////////////////////////////////////////" <<b_pars.numGPU << endl;
+	// int numAlignmentsLocal = BATCH_SIZE * ngpus; 
+	cout <<"///////////////////////////////////////////////" << ngpus << endl;
 	
 	//	Divide the alignment in batches of 30K alignments
-	for(int i = 0; i < AlignmentsToBePerformed; i += BATCH_SIZE * b_pars.numGPU)
+	for(int i = 0; i < AlignmentsToBePerformed; i += BATCH_SIZE * ngpus)
 	{
-		if(AlignmentsToBePerformed < (i + BATCH_SIZE * b_pars.numGPU))
-			numAlignmentsLocal = AlignmentsToBePerformed % (BATCH_SIZE * b_pars.numGPU);
+		if(AlignmentsToBePerformed < (i + BATCH_SIZE * ngpus))
+			numAlignmentsLocal = AlignmentsToBePerformed % (BATCH_SIZE * ngpus);
 
 		int* res = (int*)malloc(numAlignmentsLocal * sizeof(int));	
 
-		std::vector<string>::const_iterator first_t = target.begin() + i;
-		std::vector<string>::const_iterator last_t  = target.begin() + i + numAlignmentsLocal;
+		std::vector<string>::const_iterator first_t = seqsH.begin() + i;
+		std::vector<string>::const_iterator last_t  = seqsH.begin() + i + numAlignmentsLocal;
 		std::vector<string> target_b(first_t, last_t);
 
-		std::vector<string>::const_iterator first_q = query.begin() + i;
-		std::vector<string>::const_iterator last_q  = query.begin() + i + numAlignmentsLocal;
+		std::vector<string>::const_iterator first_q = seqsV.begin() + i;
+		std::vector<string>::const_iterator last_q  = seqsV.begin() + i + numAlignmentsLocal;
 		std::vector<string> query_b(first_q, last_q);
 
 		std::vector<SeedL>::const_iterator first_s = seeds.begin() + i;
 		std::vector<SeedL>::const_iterator last_s  = seeds.begin() + i + numAlignmentsLocal;
 		std::vector<SeedL> seeds_b(first_s, last_s);
 
-		extendSeedL(seeds_b, EXTEND_BOTHL, target_b, query_b, scoring, b_pars.xDrop, b_pars.kmerSize, res, numAlignmentsLocal, b_pars.numGPU);
+		extendSeedL(seeds_b, EXTEND_BOTHL, target_b, query_b, scoring, xdrop, ksize, res, numAlignmentsLocal, ngpus);
 
-		for(int j=0; j<numAlignmentsLocal; j++)
-		{
-			longestExtensionScore[j+i].score = res[j];
-			longestExtensionScore[j+i].seed = seeds_b[j];
-		}
+		// for(int j=0; j<numAlignmentsLocal; j++)
+		// {
+		// 	longestExtensionScore[j+i].score = res[j];
+		// 	longestExtensionScore[j+i].seed = seeds_b[j];
+		// }
 
 		free(res);
 	}

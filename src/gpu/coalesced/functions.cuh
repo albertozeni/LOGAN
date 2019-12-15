@@ -512,12 +512,15 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	char *prefQ_d[MAX_GPUS], *prefT_d[MAX_GPUS];
 	char *suffQ_d[MAX_GPUS], *suffT_d[MAX_GPUS];
 
+	std::vector<double> pergpustime(ngpus);
+
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++){
 		int dim = nSequences;
 		if(i==ngpus-1)
 			dim = nSequencesLast;
 		//compute offsets and shared memory per block
+		auto start_setup_ithread = NOW;
 		ant_len_left[i]=0;
 		ant_len_right[i]=0;
 		for(int j = 0; j < dim; j++){
@@ -567,6 +570,9 @@ inline void extendSeedL(vector<SeedL> &seeds,
 			//memcpy(seqptr, target[j+i*nSequences].c_str()+getEndPositionH(seeds[j+i*nSequences]), offsetRightT[i][j]-offsetRightT[i][j-1]);
 
 		}
+		auto end_setup_ithread = NOW;
+		duration<double> setup_ithread = end_setup_ithread - start_setup_ithread;
+		pergpustime[MYTHREAD] = setup_ithread.count();
 	}
 
 	// GG: measuring load balance/imbalance
@@ -588,7 +594,6 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		//set gpu device
 		cudaSetDevice(i);
 		//create streams
-		auto end_transfer_ithread = NOW;
 		cudaStreamCreateWithFlags(&stream_r[i],cudaStreamNonBlocking);
 		cudaStreamCreateWithFlags(&stream_l[i],cudaStreamNonBlocking);
 		//allocate antidiagonals on the GPU
@@ -625,6 +630,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaMemcpyAsync(suffT_d[i], suffT[i], totalLengthTSuff[i]*sizeof(char), cudaMemcpyHostToDevice, stream_r[i]));
 		//OK
 
+		auto end_transfer_ithread = NOW;
 		duration<double> transfer_ithread = end_transfer_ithread - start_transfer_ithread;
 		pergputtime[MYTHREAD] = transfer_ithread.count();
 	}
@@ -694,7 +700,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 
 	for(int i = 0; i < ngpus; i++)
 	{
-		std::cout << "GPU" << i << "	seqs	:" << pergpuseqs[i] << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
+		std::cout << "GPU" << i << "	seqs	:	" << pergpuseqs[i] << "	setup	" << pergpustime[i] << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
 	}
 
 	cudaErrchk(cudaPeekAtLastError());

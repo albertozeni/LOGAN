@@ -79,6 +79,7 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 	std::vector<std::string> seqsV(AlignmentsToBePerformed);
 	std::vector<std::string> seqsH(AlignmentsToBePerformed);
 	std::vector<ScoringSchemeL> penalties(AlignmentsToBePerformed);
+	ScoringSchemeL sscheme(1, -1, -1, -1);
 
 	/* Pre-processing */
 	for(int i = 0; i < AlignmentsToBePerformed; i++)
@@ -101,7 +102,6 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
         }
 
 		/* match, mismatch, gap opening, gap extension */ 
-		ScoringSchemeL sscheme(1, -1, -1, -1);
 		penalties[i] = sscheme;
 		/* starting position on seqsH, starting position on seqsV, k-mer/seed size */
 		SeedL sseed(posH[i], posV[i], ksize);

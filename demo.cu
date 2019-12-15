@@ -108,7 +108,7 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 		seeds[i] = sseed;
     }
 
-	// int numAlignmentsLocal = BATCH_SIZE * ngpus; 
+	int numAlignmentsLocal = BATCH_SIZE * ngpus; 
 	cout <<"///////////////////////////////////////////////" << ngpus << endl;
 	
 	//	Divide the alignment in batches of 30K alignments
@@ -133,19 +133,8 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 		std::vector<SeedL> seeds_b(first_s, last_s);
 
 		extendSeedL(seeds_b, EXTEND_BOTHL, target_b, query_b, penalties, xdrop, ksize, res, numAlignmentsLocal, ngpus, maxt);
-
-		// for(int j=0; j<numAlignmentsLocal; j++)
-		// {
-		// 	longestExtensionScore[j+i].score = res[j];
-		// 	longestExtensionScore[j+i].seed = seeds_b[j];
-		// }
-
 		free(res);
 	}
-    // int* results = (int*)malloc(sizeof(int)*AlignmentsToBePerformed);
-	// /* TODO: maxt not used */
-	// /* Batch alignment on GPU */
-    // extendSeedL(seeds, EXTEND_BOTHL, seqsH, seqsV, penalties, xdrop, ksize, results, AlignmentsToBePerformed, ngpus, maxt);
 }
 
 int main(int argc, char **argv)

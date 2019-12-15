@@ -520,6 +520,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		if(i==ngpus-1)
 			dim = nSequencesLast;
 		//compute offsets and shared memory per block
+		int MYTHREAD = omp_get_thread_num();
 		auto start_setup_ithread = NOW;
 		ant_len_left[i]=0;
 		ant_len_right[i]=0;

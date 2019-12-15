@@ -114,7 +114,6 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 	//	Divide the alignment in batches of 30K alignments
 	for(int i = 0; i < AlignmentsToBePerformed; i += BATCH_SIZE * ngpus)
 	{
-		int numAlignmentsLocal;
 		if(AlignmentsToBePerformed < (i + BATCH_SIZE * ngpus))
 			numAlignmentsLocal = AlignmentsToBePerformed % (BATCH_SIZE * ngpus);
 

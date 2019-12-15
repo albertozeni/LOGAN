@@ -588,6 +588,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		//set gpu device
 		cudaSetDevice(i);
 		//create streams
+		auto end_transfer_ithread = NOW;
 		cudaStreamCreateWithFlags(&stream_r[i],cudaStreamNonBlocking);
 		cudaStreamCreateWithFlags(&stream_l[i],cudaStreamNonBlocking);
 		//allocate antidiagonals on the GPU
@@ -624,7 +625,6 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaMemcpyAsync(suffT_d[i], suffT[i], totalLengthTSuff[i]*sizeof(char), cudaMemcpyHostToDevice, stream_r[i]));
 		//OK
 
-		auto end_transfer_ithread = NOW;
 		duration<double> transfer_ithread = end_transfer_ithread - start_transfer_ithread;
 		pergputtime[MYTHREAD] = transfer_ithread.count();
 	}

@@ -118,7 +118,11 @@ typedef seqan::Seed<seqan::Simple> TSeed;
 // typedef std::tuple< int, int, int, int, double > myinfo;	// score, start seed, end seed, runtime
 void loganXdrop(std::vector< std::vector<std::string> > &v, int mat, int mis, int gap, int kmerLen, int xdrop)
 {
-	
+	int maxt = 1;
+	#pragma omp parallel
+	{
+		maxt = omp_get_num_threads();
+	}	
 	
 	//Result result(kmerLen);
 	int n_align = v.size();
@@ -153,14 +157,16 @@ void loganXdrop(std::vector< std::vector<std::string> > &v, int mat, int mis, in
 	seqan::Score<int, seqan::Simple> scoringScheme_s(mat, mis, -1, gap);
         cout<< "PERFORMING "<< n_align << " ALIGNMENTS"<<endl;
         int* scoreSeqAn;
-	scoreSeqAn = (int*)malloc(n_align*sizeof(int));
+		scoreSeqAn = (int*)malloc(n_align*sizeof(int));
         std::cout << "STARTING CPU" << std::endl;
         std::chrono::duration<double>  diff_s;
         vector<seqan::Dna5String> seqV_s_arr(n_align);
         vector<seqan::Dna5String> seqH_s_arr(n_align);
         TSeed* seed;
-	seed = (TSeed*)malloc(n_align*sizeof(TSeed));
-        for(int i = 0; i < n_align; i++){
+		seed = (TSeed*)malloc(n_align*sizeof(TSeed));
+
+        for(int i = 0; i < n_align; i++)
+		{
                 seqan::Dna5String seqV_s(seqV[i]);
                 seqan::Dna5String seqH_s(seqH[i]);
                 seqV_s_arr[i]=seqV_s;
@@ -168,15 +174,28 @@ void loganXdrop(std::vector< std::vector<std::string> > &v, int mat, int mis, in
                 TSeed tmp(posH[i], posV[i], kmerLen);
                 seed[i]=tmp;
         }
+
         auto start_s = std::chrono::high_resolution_clock::now();
-        #pragma omp parallel for
-	for(int i = 0; i < n_align; i++){
-               	//printf("N threads: %d\n", omp_get_num_threads());
-		scoreSeqAn[i] = seqan::extendSeed(seed[i], seqH_s_arr[i], seqV_s_arr[i], seqan::EXTEND_BOTH, scoringScheme_s, xdrop, seqan::GappedXDrop(), kmerLen);
+		std::vector<int64_t> cupsperthread(maxt);
+		int64_t cups = 0;
+
+    #pragma omp parallel for
+		for(int i = 0; i < n_align; i++)
+		{
+        	// printf("N threads: %d\n", omp_get_num_threads());
+			int tid = omp_get_thread_num();
+			cupsperthread[tid] = 0;
+			scoreSeqAn[i] = seqan::extendSeed(seed[i], seqH_s_arr[i], seqV_s_arr[i], seqan::EXTEND_BOTH, scoringScheme_s, xdrop, seqan::GappedXDrop(), kmerLen, cupsperthread[tid]);
         }
+
         auto end_s = std::chrono::high_resolution_clock::now();
         diff_s = end_s-start_s;
-        cout << "SEQAN TIME:\t" <<  diff_s.count() <<endl;
+
+		for(int tid = 0; tid < maxt; tid++)
+			cups += cupsperthread[tid];
+
+		// cout << "SEQAN TIME:\t" <<  diff_s.count() <<endl;
+		cout << "GCUPS:	" << (double)cups/double(1024*1024*1024) << endl;
 }
 
 //=======================================================================

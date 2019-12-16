@@ -629,7 +629,7 @@ _extendSeedGappedXDropOneDirection(
         TDatabaseSegment const & databaseSeg,
         ExtensionDirection direction,
         Score<TScoreValue, TScoreSpec> scoringScheme,
-        TScoreValue scoreDropOff)
+        TScoreValue scoreDropOff, int64_t& cups)
 {
     typedef typename Size<TQuerySegment>::Type TSize;
     typedef typename Seed<Simple,TConfig>::TDiagonal TDiagonal;
@@ -689,6 +689,9 @@ _extendSeedGappedXDropOneDirection(
         offset2 = offset3;
         offset3 = minCol-1;
         _initAntiDiag3(antiDiag3, offset3, maxCol, antiDiagNo, best - scoreDropOff, gapCost, undefined);
+        
+        // GCUPS
+        cups += length(antiDiag3);
 
         TScoreValue antiDiagBest = antiDiagNo * gapCost;
         //auto start = std::chrono::high_resolution_clock::now(); 
@@ -830,7 +833,7 @@ extendSeed(Seed<Simple, TConfig> & seed,
            Score<TScoreValue, TScoreSpec> const & scoringScheme,
            TScoreValue scoreDropOff,
            GappedXDrop const &,
-           int kmerLen)
+           int kmerLen, int64_t& cups)
 {
     // For gapped X-drop extension of Simple Seeds, we can simply
     // update the begin and end values in each dimension as well as the diagonals.
@@ -860,7 +863,7 @@ extendSeed(Seed<Simple, TConfig> & seed,
         TDatabasePrefix databasePrefix = prefix(database, beginPositionH(seed));
         TQueryPrefix queryPrefix = prefix(query, beginPositionV(seed));
         // TODO(holtgrew): Update _extendSeedGappedXDropOneDirection and switch query/database order.
-        longestExtensionScoreLeft = _extendSeedGappedXDropOneDirection(seed, queryPrefix, databasePrefix, EXTEND_LEFT, scoringScheme, scoreDropOff);
+        longestExtensionScoreLeft = _extendSeedGappedXDropOneDirection(seed, queryPrefix, databasePrefix, EXTEND_LEFT, scoringScheme, scoreDropOff, cups);
     }
 
     if (direction == EXTEND_RIGHT || direction == EXTEND_BOTH)
@@ -878,7 +881,7 @@ extendSeed(Seed<Simple, TConfig> & seed,
         // std::cout << "query = " << query << std::endl;
         // std::cout << "query Suffix = " << querySuffix << std::endl;
         // TODO(holtgrew): Update _extendSeedGappedXDropOneDirection and switch query/database order.
-        longestExtensionScoreRight =  _extendSeedGappedXDropOneDirection(seed, querySuffix, databaseSuffix, EXTEND_RIGHT, scoringScheme, scoreDropOff);
+        longestExtensionScoreRight =  _extendSeedGappedXDropOneDirection(seed, querySuffix, databaseSuffix, EXTEND_RIGHT, scoringScheme, scoreDropOff, cups);
     }
     //std::cout<<"scoreLeft: "<<longestExtensionScoreLeft<<" scoreRight: "<<longestExtensionScoreRight<<std::endl;
     longestExtensionScore = longestExtensionScoreRight + longestExtensionScoreLeft;

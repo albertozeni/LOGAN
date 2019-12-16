@@ -424,7 +424,8 @@ inline void extendSeedL(vector<SeedL> &seeds,
 			int *res,
 			int numAlignments,
 			int ngpus,
-			int n_threads
+			int n_threads,
+			long int cups
 			)
 {
 
@@ -579,7 +580,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	// GG: measuring load balance/imbalance
 	std::vector<double> pergputtime(ngpus);
 	std::vector<double> pergpuctime(ngpus);
-	std::vector<int> pergpuseqs(ngpus);
+	std::vector<int> 	pergpuseqs(ngpus);
 
 	auto start_transfer = NOW;
 

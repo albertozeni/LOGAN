@@ -424,8 +424,8 @@ inline void extendSeedL(vector<SeedL> &seeds,
 			int *res,
 			int numAlignments,
 			int ngpus,
-			int n_threads,
-			long int cups
+			int n_threads
+			//,long int cups
 			)
 {
 
@@ -700,10 +700,10 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	duration<double> compute = end_c-start_c;
 	std::cout << "Compute time:	" << compute.count() << std::endl;
 
-	for(int i = 0; i < ngpus; i++)
+	/*for(int i = 0; i < ngpus; i++)
 	{
 		std::cout << "GPU" << i << "	seqs	:	" << pergpuseqs[i] << "	setup	" << pergpustime[i] << "	transfer	" << pergputtime[i] << " compute	" << pergpuctime[i] << std::endl;
-	}
+	}*/
 
 	cudaErrchk(cudaPeekAtLastError());
 

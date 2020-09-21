@@ -11,16 +11,14 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 ### Compilation
 
-LOGAN requires CUDA 10 and C++14. To compile LOGAN simply type:
+LOGAN requires CUDA 10 and C++14. To compile LOGAN use the standard cmake build sequence:
 ```
-make demo_v100
+mkdir build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
 ```
-LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but can run on any NVIDA GPU.
-To compile to use other GPUs simply type:
-```
-make demo
-```
-This command disables Tesla V100 GPU optmimization flags. 
+LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but code will be compiled for all GPU architectures.
+
 
 ### Demo
 LOGAN generates an executable called **demo**.

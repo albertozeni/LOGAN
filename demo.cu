@@ -138,6 +138,11 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 
 int main(int argc, char **argv)
 {
+	if(argc!=5){
+		std::cout<<"Syntax: "<<argv[0]<<" <input> <k-mer-length> <X-drop> <#GPUS>"<<std::endl;
+		return -1;
+	}
+
 	std::ifstream input(argv[1]);
 
 	int ksize = atoi(argv[2]);

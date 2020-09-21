@@ -154,13 +154,13 @@ int main(int argc, char **argv)
 	cudaFree(0);
 
 	// @AlignmentsToBePerformed = alignments to be performed
-	uint64_t AlignmentsToBePerformed = std::count(std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>(), '\n');
+	const auto AlignmentsToBePerformed = std::count(std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>(), '\n');
     input.seekg(0, std::ios_base::beg);
 
     /* Read input file */
 	std::vector<std::string> entries;
     if(input)
-        for (int i = 0; i < AlignmentsToBePerformed; ++i)
+        for (int64_t i = 0; i < AlignmentsToBePerformed; ++i)
         {
             std::string line;
             std::getline(input, line);
@@ -173,7 +173,7 @@ int main(int argc, char **argv)
 
 	/* Pre-processing */
 	#pragma omp parallel for
-    for(uint64_t i = 0; i < AlignmentsToBePerformed; i++)
+    for(int64_t i = 0; i < AlignmentsToBePerformed; i++)
     {
 		int tid = omp_get_thread_num();
         std::vector<std::string> tmp = split(entries[i], '\t');

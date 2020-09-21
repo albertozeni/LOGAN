@@ -709,7 +709,6 @@ inline void extendSeedL(vector<SeedL> &seeds,
 
 	//cudaStreamDestroy(stream_l);
 	//cudaStreamDestroy(stream_r);
-	auto start_f = NOW;
 
 	#pragma omp parallel for
 	for(int i = 0; i < ngpus; i++){
@@ -737,8 +736,7 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaFree(ant_r[i]));
 
 	}
-	auto end_f = NOW;
-	
+
 	for(int i = 0; i < numAlignments; i++){
 		res[i] = scoreLeft[i]+scoreRight[i]+kmer_length;
 		setEndPositionH(seeds[i], getEndPositionH(seeds_r[i]));    

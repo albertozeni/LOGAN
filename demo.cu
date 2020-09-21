@@ -15,8 +15,8 @@
 #include <cmath>
 #include <numeric>
 #include <vector>
-#include <sys/types.h> 
-#include <sys/stat.h> 
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <math.h>
 #include <limits.h>
 #include <bitset>
@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <unistd.h>
-#include <ctype.h> 
+#include <ctype.h>
 #include <sstream>
 #include <cassert>
 #include <set>
@@ -41,9 +41,9 @@
 
 /* nucleotide complement */
 char basecomplement (char n)
-{	
+{
 	switch(n)
-	{   
+	{
 	case 'A':
 		return 'T';
 	case 'T':
@@ -52,7 +52,7 @@ char basecomplement (char n)
 		return 'C';
 	case 'C':
 		return 'G';
-	}	
+	}
 	assert(false);
 	return ' ';
 }
@@ -70,7 +70,7 @@ std::vector<std::string> split(const std::string &s, char delim)
 }
 
 /* LOGAN's function call */
-void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize, 
+void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
 				int xdrop, int AlignmentsToBePerformed, int ngpus, int maxt)
 {
 	std::vector<int> 	posV(AlignmentsToBePerformed);
@@ -101,23 +101,23 @@ void LOGAN(std::vector<std::vector<std::string>> &alignments, int ksize,
             posH[i] = seqsH[i].length()-posH[i]-ksize;
         }
 
-		/* match, mismatch, gap opening, gap extension */ 
+		/* match, mismatch, gap opening, gap extension */
 		penalties[i] = sscheme;
 		/* starting position on seqsH, starting position on seqsV, k-mer/seed size */
 		SeedL sseed(posH[i], posV[i], ksize);
 		seeds[i] = sseed;
     }
 
-	int numAlignmentsLocal = BATCH_SIZE * ngpus; 
+	int numAlignmentsLocal = BATCH_SIZE * ngpus;
 	cout <<"///////////////////////////////////////////////" << ngpus << endl;
-	
+
 	//	Divide the alignment in batches of 30K alignments
 	for(int i = 0; i < AlignmentsToBePerformed; i += BATCH_SIZE * ngpus)
 	{
 		if(AlignmentsToBePerformed < (i + BATCH_SIZE * ngpus))
 			numAlignmentsLocal = AlignmentsToBePerformed % (BATCH_SIZE * ngpus);
 
-		int* res = (int*)malloc(numAlignmentsLocal * sizeof(int));	
+		int* res = (int*)malloc(numAlignmentsLocal * sizeof(int));
 
 		std::vector<string>::const_iterator first_t = seqsH.begin() + i;
 		std::vector<string>::const_iterator last_t  = seqsH.begin() + i + numAlignmentsLocal;
@@ -140,8 +140,8 @@ int main(int argc, char **argv)
 {
 	std::ifstream input(argv[1]);
 
-	int ksize = atoi(argv[2]);	
-	int xdrop = atoi(argv[3]);	
+	int ksize = atoi(argv[2]);
+	int xdrop = atoi(argv[3]);
 	int ngpus = atoi(argv[4]);
 
 	int maxt = 1;
@@ -188,9 +188,7 @@ int main(int argc, char **argv)
 	}
 
 	/* Compute pairwise alignments */
-   	LOGAN(alignments, ksize, xdrop, AlignmentsToBePerformed, ngpus, maxt);	
-		
+   	LOGAN(alignments, ksize, xdrop, AlignmentsToBePerformed, ngpus, maxt);
+
    	return 0;
 }
-
-

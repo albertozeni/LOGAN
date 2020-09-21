@@ -476,10 +476,10 @@ inline void extendSeedL(vector<SeedL> &seeds,
 			//seeds_l.push_back(seeds[i]);
 	}
 
-	//sequences offsets	 		
+	//sequences offsets
 	vector<int> offsetLeftQ[MAX_GPUS];
-	vector<int> offsetLeftT[MAX_GPUS];	
-	vector<int> offsetRightQ[MAX_GPUS];	
+	vector<int> offsetLeftT[MAX_GPUS];
+	vector<int> offsetRightQ[MAX_GPUS];
 	vector<int> offsetRightT[MAX_GPUS];
 
 	//shared_mem_size per block per GPU
@@ -502,14 +502,14 @@ inline void extendSeedL(vector<SeedL> &seeds,
 	//declare GPU offsets
 	int *offsetLeftQ_d[MAX_GPUS], *offsetLeftT_d[MAX_GPUS];
 	int *offsetRightQ_d[MAX_GPUS], *offsetRightT_d[MAX_GPUS];
-	
+
 	//declare GPU results
 	int *scoreLeft_d[MAX_GPUS], *scoreRight_d[MAX_GPUS];
 
 	//declare GPU seeds
 	SeedL *seed_d_l[MAX_GPUS], *seed_d_r[MAX_GPUS];
 
-	//declare prefixes and suffixes on the GPU  
+	//declare prefixes and suffixes on the GPU
 	char *prefQ_d[MAX_GPUS], *prefT_d[MAX_GPUS];
 	char *suffQ_d[MAX_GPUS], *suffT_d[MAX_GPUS];
 
@@ -530,14 +530,14 @@ inline void extendSeedL(vector<SeedL> &seeds,
 			offsetLeftQ[i].push_back(getBeginPositionV(seeds[j+i*nSequences]));
 			offsetLeftT[i].push_back(getBeginPositionH(seeds[j+i*nSequences]));
 			ant_len_left[i] = std::max(std::min(offsetLeftQ[i][j],offsetLeftT[i][j]), ant_len_left[i]);
-			
+
 			offsetRightQ[i].push_back(query[j+i*nSequences].size()-getEndPositionV(seeds[j+i*nSequences]));
 			offsetRightT[i].push_back(target[j+i*nSequences].size()-getEndPositionH(seeds[j+i*nSequences]));
 			ant_len_right[i] = std::max(std::min(offsetRightQ[i][j], offsetRightT[i][j]), ant_len_right[i]);
 		}
-		
+
 		//compute antidiagonal offsets
-		partial_sum(offsetLeftQ[i].begin(),offsetLeftQ[i].end(),offsetLeftQ[i].begin());	
+		partial_sum(offsetLeftQ[i].begin(),offsetLeftQ[i].end(),offsetLeftQ[i].begin());
 		partial_sum(offsetLeftT[i].begin(),offsetLeftT[i].end(),offsetLeftT[i].begin());
 		partial_sum(offsetRightQ[i].begin(),offsetRightQ[i].end(),offsetRightQ[i].begin());
 		partial_sum(offsetRightT[i].begin(),offsetRightT[i].end(),offsetRightT[i].begin());
@@ -636,16 +636,16 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		duration<double> transfer_ithread = end_transfer_ithread - start_transfer_ithread;
 		pergputtime[MYTHREAD] = transfer_ithread.count();
 	}
-	
-	
+
+
 	auto end_t1 = NOW;
 	duration<double> setup_transfer=end_t1-start_t1;
 	duration<double> transfer=end_t1-start_transfer;
 	std::cout << "Input setup time: " << setup_transfer.count() << std::endl;
 	std::cout << "Input transfer and malloc time: " << transfer.count() << std::endl;
-	
+
 	auto start_c = NOW;
-	
+
 	//execute kernels
 	#pragma omp parallel for
 	for(int i = 0; i<ngpus;i++)
@@ -653,11 +653,11 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		int MYTHREAD = omp_get_thread_num();
 		auto start_c_ithread_1 = NOW;
 		cudaSetDevice(i);
-		
+
 		int dim = nSequences;
 		if(i==ngpus-1)
 			dim = nSequencesLast;
-		
+
 		extendSeedLGappedXDropOneDirectionGlobal <<<dim, n_threads, n_threads*sizeof(short), stream_l[i]>>> (seed_d_l[i], prefQ_d[i], prefT_d[i], EXTEND_LEFTL, XDrop, scoreLeft_d[i], offsetLeftQ_d[i], offsetLeftT_d[i], ant_len_left[i], ant_l[i], n_threads);
 		extendSeedLGappedXDropOneDirectionGlobal <<<dim, n_threads, n_threads*sizeof(short), stream_r[i]>>> (seed_d_r[i], suffQ_d[i], suffT_d[i], EXTEND_RIGHTL, XDrop, scoreRight_d[i], offsetRightQ_d[i], offsetRightT_d[i], ant_len_right[i], ant_r[i], n_threads);
 		auto end_c_ithread_1 = NOW;
@@ -732,20 +732,19 @@ inline void extendSeedL(vector<SeedL> &seeds,
 		cudaErrchk(cudaFree(seed_d_r[i]));
 		cudaErrchk(cudaFree(scoreLeft_d[i]));
 		cudaErrchk(cudaFree(scoreRight_d[i]));
-		cudaErrchk(cudaFree(ant_l[i])); 
+		cudaErrchk(cudaFree(ant_l[i]));
 		cudaErrchk(cudaFree(ant_r[i]));
 
 	}
 
 	for(int i = 0; i < numAlignments; i++){
 		res[i] = scoreLeft[i]+scoreRight[i]+kmer_length;
-		setEndPositionH(seeds[i], getEndPositionH(seeds_r[i]));    
-		setEndPositionV(seeds[i], getEndPositionV(seeds_r[i])); 
+		setEndPositionH(seeds[i], getEndPositionH(seeds_r[i]));
+		setEndPositionV(seeds[i], getEndPositionV(seeds_r[i]));
 		//cout << res[i] <<endl;
 	}
-	
+
 	free(scoreLeft);
 	free(scoreRight);
-		
-}
 
+}

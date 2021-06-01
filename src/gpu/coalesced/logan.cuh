@@ -1,6 +1,6 @@
 //==================================================================
 // Title:  Cuda x-drop seed-and-extend alignment algorithm
-// Author: G. Guidi, A. Zeni
+// Author: A. Zeni, G. Guidi
 // Date:   6 March 2019
 //==================================================================
 

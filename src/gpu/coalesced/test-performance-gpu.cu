@@ -1,7 +1,7 @@
 
 //========================================================================================================
 // Title:  C++ program to assest quality and performance of LOGAN wrt to original SeqAn implementation
-// Author: G. Guidi
+// Author: A. Zeni, G. Guidi
 // Date:   12 March 2019
 //========================================================================================================
 

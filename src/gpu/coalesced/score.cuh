@@ -1,6 +1,6 @@
 //==================================================================
 // Title:  C++ x-drop seed-and-extend alignment algorithm
-// Author: G. Guidi, A. Zeni
+// Author: A. Zeni, G. Guidi
 // Date:   8 March 2019
 //==================================================================
 

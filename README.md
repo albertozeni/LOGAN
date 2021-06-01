@@ -75,7 +75,7 @@ LOGAN and [ksw2](https://github.com/lh3/ksw2) execution times in seconds for 100
 
 To cite our work or to know more about our methods, please refer to:
 
-> Zeni A, Guidi G, Ellis M, Ding N, Santambrogio MD, Hofmeyr S, Buluç A, Oliker L, Yelick K. [LOGAN: High-Performance GPU-Based X-Drop Long-Read Alignment](https://arxiv.org/abs/2002.05200). arXiv preprint arXiv:2002.05200. 2020 Feb 12.
+> Zeni A, Guidi G, Ellis M, Ding N, Santambrogio MD, Hofmeyr S, Buluç A, Oliker L, Yelick K. [LOGAN: High-Performance GPU-Based X-Drop Long-Read Alignment](https://ieeexplore.ieee.org/abstract/document/9139808). 2020 IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 462-471. IEEE, 2020.
 
 The paper is going to appear at the 34th IEEE International Parallel and Distributed Processing Symposium (IPDPS), 2020.
 

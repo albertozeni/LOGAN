@@ -13,14 +13,14 @@ Pairwise sequence alignment is one of the most computationally intensive kernels
 
 LOGAN requires CUDA 10 and C++14. To compile LOGAN simply type:
 ```
-make demo_v100
+make demo v100=true
 ```
 LOGAN has been optimized to run on the NVIDIA Tesla V100 (GB), but can run on any NVIDA GPU.
 To compile to use other GPUs simply type:
 ```
 make demo
 ```
-This command disables Tesla V100 GPU optmimization flags. 
+This command disables Tesla V100 GPU optmization flags. 
 
 ### Demo
 LOGAN generates an executable called **demo**.
@@ -76,8 +76,6 @@ LOGAN and [ksw2](https://github.com/lh3/ksw2) execution times in seconds for 100
 To cite our work or to know more about our methods, please refer to:
 
 > Zeni A, Guidi G, Ellis M, Ding N, Santambrogio MD, Hofmeyr S, Buluç A, Oliker L, Yelick K. [LOGAN: High-Performance GPU-Based X-Drop Long-Read Alignment](https://ieeexplore.ieee.org/abstract/document/9139808). 2020 IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 462-471. IEEE, 2020.
-
-The paper is going to appear at the 34th IEEE International Parallel and Distributed Processing Symposium (IPDPS), 2020.
 
 ## Copyright Notice
 <p align="justify">

@@ -9,6 +9,7 @@
 using namespace std;
 
 #define BATCH_SIZE 30000
+#define GPU_THREADS 128
 
 /* nucleotide complement */
 char basecomplement (char n)
@@ -114,12 +115,6 @@ int main(int argc, char **argv)
 	int xdrop = atoi(argv[3]);	
 	int ngpus = atoi(argv[4]);
 
-	int maxt = 1;
-	#pragma omp parallel
-	{
-		maxt = omp_get_num_threads();
-	}
-
 	/* Init the GPU environment */
 	cudaFree(0);
 
@@ -138,7 +133,7 @@ int main(int argc, char **argv)
         }
     input.close();
 
-	std::vector<std::vector<std::vector<std::string>>> local(maxt);
+	std::vector<std::vector<std::vector<std::string>>> local(GPU_THREADS);
 	std::vector<std::vector<std::string>> alignments(AlignmentsToBePerformed);
 
 	/* Pre-processing */
@@ -151,7 +146,7 @@ int main(int argc, char **argv)
     }
 
 	unsigned int alignmentssofar = 0;
-	for(int tid = 0; tid < maxt; ++tid)
+	for(int tid = 0; tid < GPU_THREADS; ++tid)
 	{
 		copy(local[tid].begin(), local[tid].end(), alignments.begin() + alignmentssofar);
 		alignmentssofar += local[tid].size();
@@ -159,7 +154,7 @@ int main(int argc, char **argv)
 
 	/* Compute pairwise alignments */
 	auto start = NOW;
-   	LOGAN(alignments, ksize, xdrop, AlignmentsToBePerformed, ngpus, maxt);	
+   	LOGAN(alignments, ksize, xdrop, AlignmentsToBePerformed, ngpus, GPU_THREADS);	
 	auto end = NOW;	
 	std::chrono::duration<double> tot_time = end-start;
 	double duration_tot = tot_time.count();

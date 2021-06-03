@@ -389,11 +389,11 @@ void extendSeedL(std::vector<SeedL> &seeds,
 	}
 	//start measuring time
 	auto start_t1 = NOW;
-
-	
+	#ifdef ADAPTABLE
     n_threads = (XDrop/WARP_DIM + 1)* WARP_DIM;
     if(n_threads>1024)
         n_threads=1024;
+	#endif
 
 	//declare streams
 	cudaStream_t stream_r[MAX_GPUS], stream_l[MAX_GPUS];

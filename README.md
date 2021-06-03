@@ -21,7 +21,12 @@ To compile to use other GPUs simply type:
 make demo
 ```
 This command disables Tesla V100 GPU optmization flags. 
-
+LOGAN has also been optimized to run on a specific number of GPU threads, 
+but it is capable to adapt the number of GPU threads depending on the X drop value.
+To do so simply type:
+```
+make demo adapt=true
+```
 ### Demo
 LOGAN generates an executable called **demo**.
 To check everything has been compiled properly type:

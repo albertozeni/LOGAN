@@ -51,6 +51,7 @@ LOGAN has been incorporated as part of the [**BELLA**](https://github.com/giulia
 ## Performance Analysis
 
 LOGAN and [SeqAn](https://github.com/seqan/seqan) execution times in seconds for 100K alignments (Power9 platform with 6 NVIDIA Tesla V100S).
+The dataset used for these comparisons is available here: https://drive.google.com/drive/folders/1IUpxTPeD4oIOtS6jhp1N9G2N2BNKgrCI?usp=sharing
 
 | X-Drop 	| SeqAn 	| LOGAN (1 GPU) 	| LOGAN (6 GPUs) 	|
 |--------:	|-------:	|---------------:	|----------------:	|
